@@ -1,3 +1,4 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* initial release with basic customization
+* Added basic multi form builder with support of customization of indicator widget and page widgets will only build when on view

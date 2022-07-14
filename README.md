@@ -11,29 +11,62 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A customizable multi form builder.
 
 ## Features
+- Customizable Form Builder
+- On Demand page built when on view
+- Execute function on page changed and on last page
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Installation
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
+- Add dependencies as 
+```yaml
+  multi_form_builder:
+    git:
+      url: https://github.com/Shreemanarjun/multi_form_builder.git
+      ref: main
+```
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+- First import the library
+```dart
+import 'package:multi_form_builder/multi_form_builder.dart';
+```
+- Initialize a page controller
+```dart
+ final PageController pageController = PageController();
+```
+- Example
 
 ```dart
-const like = 'sample';
+MultiFormBuilder(
+          onPageChanged: (int currentpage) {
+            debugPrint('current page: $currentpage');
+          },
+          onLastPage: () {
+            debugPrint('last page got');
+          },
+          controller: pageController,
+          itemBuilder: (BuildContext context, int index) {
+            return MyWidget(text: 'Page $index');
+          },
+          itemCount: 3,
+          indicatorWidget: (context, totalItems) {
+            return SmoothPageIndicator(
+              controller: pageController, // PageController
+              count: totalItems, // total number of pages
+              effect: const SlideEffect(), // your preferred effect
+              onDotClicked: (int dotindex) {
+                pageController.jumpToPage(dotindex);
+              },
+            );
+          },
+        ),
 ```
 
-## Additional information
+## Features that will be added 
+- [x] Added basic multi form builder with support of customization of indicator widget and page widgets will only build when on view
+- [ ] To Add Auto Form Builder that will fit to the current view automatically and create number of pages according to that.Also will add more customization like, to add widgets on the **``last ``**,**``intermidiate ``**,**``first ``** pages.
+- [ ] To publish on pub.dev
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
